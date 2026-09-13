@@ -1,0 +1,227 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 130;
+  transition: background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.nav.is-scrolled {
+  background: rgba(4, 3, 10, 0.72);
+  backdrop-filter: blur(18px) saturate(140%);
+  border-bottom-color: var(--line);
+}
+
+.nav__inner {
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: 0.85rem var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.06rem;
+  letter-spacing: -0.03em;
+}
+
+.nav__mark {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  color: var(--violet-soft);
+  transition: transform 0.6s var(--ease-spring), color 0.4s ease;
+}
+
+.nav__mark svg {
+  width: 100%;
+  height: 100%;
+}
+
+.nav__brand:hover .nav__mark {
+  transform: rotate(180deg);
+  color: var(--coral);
+}
+
+.nav__name b {
+  color: var(--coral);
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.3rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+}
+
+.nav__links a {
+  position: relative;
+  padding: 0.42rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.87rem;
+  font-weight: 500;
+  color: var(--text-dim);
+  transition: color 0.3s ease;
+}
+
+.nav__links a span {
+  position: relative;
+  z-index: 1;
+}
+
+.nav__links a:hover {
+  color: var(--text);
+}
+
+.nav__links a.is-active {
+  color: #0a0714;
+}
+
+.nav__pill {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--grad-main);
+}
+
+.nav__cta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.nav__hire {
+  padding: 0.62rem 1.25rem;
+  font-size: 0.86rem;
+}
+
+/* burger */
+.burger {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--glass);
+  position: relative;
+  z-index: 130;
+}
+
+.burger span {
+  position: absolute;
+  left: 12px;
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text);
+  transition: transform 0.4s var(--ease-out), opacity 0.3s ease;
+}
+
+.burger span:nth-child(1) {
+  top: 18px;
+}
+.burger span:nth-child(2) {
+  top: 25px;
+  width: 13px;
+}
+
+.burger.is-open span:nth-child(1) {
+  transform: translateY(3.5px) rotate(45deg);
+}
+.burger.is-open span:nth-child(2) {
+  width: 20px;
+  transform: translateY(-3.5px) rotate(-45deg);
+}
+
+/* drawer */
+.drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: radial-gradient(120% 80% at 80% 0%, #120a29, #04030a 62%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  padding: 6rem var(--gutter) 3rem;
+}
+
+.drawer ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.drawer ul a {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 10vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  padding-block: 0.25rem;
+  transition: color 0.3s ease, transform 0.4s var(--ease-out);
+}
+
+.drawer ul a em {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--violet-soft);
+  letter-spacing: 0.1em;
+}
+
+.drawer ul a:hover {
+  color: var(--lime);
+  transform: translateX(10px);
+}
+
+.drawer__foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.2rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+
+@media (max-width: 950px) {
+  .nav__links,
+  .nav__hire {
+    display: none !important;
+  }
+  .burger {
+    display: block;
+  }
+}
+
+.drawer__foot a {
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+  color: var(--text-dim);
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  transition: color 0.3s ease;
+}
+
+.drawer__foot a:hover {
+  color: var(--lime);
+}

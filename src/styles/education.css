@@ -1,0 +1,177 @@
+.edu {
+  position: relative;
+}
+
+.edu__sticky {
+  position: sticky;
+  top: 0;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  padding-block: clamp(4rem, 9vw, 7rem);
+  overflow: hidden;
+}
+
+.edu__track {
+  display: flex;
+  gap: 1.2rem;
+  padding-inline: var(--gutter);
+  width: max-content;
+  will-change: transform;
+}
+
+.edu__card {
+  position: relative;
+  width: min(520px, 84vw);
+  flex: none;
+  padding: clamp(1.6rem, 3vw, 2.2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  transition: transform 0.55s var(--ease-out), border-color 0.4s ease;
+}
+
+.edu__card:hover {
+  transform: translateY(-10px);
+  border-color: var(--line-strong);
+}
+
+.edu__index {
+  color: var(--text-faint);
+  letter-spacing: 0.18em;
+}
+
+.edu__ribbon {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #0a0714;
+  background: linear-gradient(120deg, var(--a1), var(--a2));
+}
+
+.edu__cap {
+  width: 54px;
+  height: 54px;
+  margin: 1.1rem 0 0.6rem;
+  display: grid;
+  place-items: center;
+  border-radius: 17px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--a1);
+  transition: transform 0.6s var(--ease-spring), background 0.4s ease, color 0.4s ease;
+}
+
+.edu__cap svg {
+  width: 27px;
+  height: 27px;
+}
+
+.edu__card:hover .edu__cap {
+  transform: translateY(-4px) rotate(-7deg);
+  color: #0a0714;
+  background: linear-gradient(135deg, var(--a1), var(--a2));
+}
+
+.edu__school {
+  font-size: clamp(1.3rem, 2.6vw, 1.75rem);
+  letter-spacing: -0.035em;
+}
+
+.edu__degree {
+  font-size: 1rem;
+  color: var(--a1);
+  font-weight: 500;
+}
+
+.edu__detail {
+  font-size: 0.92rem;
+  color: var(--text-dim);
+}
+
+.edu__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.4rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line);
+}
+
+.edu__date {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  background: linear-gradient(120deg, var(--a1), var(--a2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.edu__place {
+  color: var(--text-faint);
+}
+
+.edu__shine {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--a1) 18%, transparent), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.edu__card:hover .edu__shine {
+  opacity: 1;
+}
+
+.edu__progress {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.edu__progressTrack {
+  flex: 1;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.edu__progressTrack i {
+  display: block;
+  height: 100%;
+  transform-origin: 0 50%;
+  background: var(--grad-main);
+}
+
+@media (max-width: 860px) {
+  .edu {
+    height: auto !important;
+    padding-block: 0;
+  }
+  .edu__sticky {
+    position: static;
+    min-height: 0;
+    padding-block: clamp(5rem, 11vw, 9.5rem);
+  }
+  .edu__track {
+    flex-direction: column;
+    width: 100%;
+    transform: none !important;
+  }
+  .edu__card {
+    width: 100%;
+  }
+}

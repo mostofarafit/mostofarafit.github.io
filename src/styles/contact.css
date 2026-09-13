@@ -1,0 +1,303 @@
+.contact {
+  position: relative;
+}
+
+.contact__shout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.contact__title {
+  font-size: clamp(2.4rem, 8vw, 5.4rem);
+  letter-spacing: -0.05em;
+  max-width: 14ch;
+}
+
+.contact__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: clamp(1.2rem, 3vw, 2rem);
+  align-items: start;
+}
+
+.contact__channels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.contact__chWrap {
+  display: flex;
+}
+
+.contact__ch {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  transition: transform 0.45s var(--ease-out), border-color 0.35s ease;
+}
+
+.contact__ch:hover {
+  transform: translateX(7px);
+  border-color: var(--line-strong);
+}
+
+.contact__chIcon {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--a1);
+  transition: transform 0.5s var(--ease-spring), background 0.4s ease, color 0.4s ease;
+}
+
+.contact__chIcon svg {
+  width: 21px;
+  height: 21px;
+}
+
+.contact__ch:hover .contact__chIcon {
+  transform: rotate(-8deg);
+  color: #0a0714;
+  background: linear-gradient(135deg, var(--a1), var(--a2));
+}
+
+.contact__chText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.contact__chText em {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.contact__chText b {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contact__chArrow {
+  width: 18px;
+  height: 18px;
+  margin-left: auto;
+  flex: none;
+  color: var(--text-faint);
+  transition: transform 0.4s var(--ease-out), color 0.3s ease;
+}
+
+.contact__ch:hover .contact__chArrow {
+  transform: translateX(4px);
+  color: var(--a1);
+}
+
+.contact__copy {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.contact__copy:hover {
+  color: var(--lime);
+  border-color: rgba(200, 255, 94, 0.35);
+}
+
+.contact__copy i {
+  font-style: normal;
+  font-size: 1.05rem;
+  color: var(--lime);
+  display: inline-block;
+}
+
+.contact__avail {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.05rem 1.25rem;
+  background: linear-gradient(135deg, rgba(124, 92, 255, 0.1), rgba(255, 92, 122, 0.05)), var(--card-base);
+}
+
+.contact__avail b {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+}
+
+.contact__availDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--lime);
+  flex: none;
+  animation: ping 2s ease-out infinite;
+}
+
+/* ---------- intent picker ---------- */
+.contact__pickWrap {
+  display: flex;
+}
+
+.contact__pick {
+  width: 100%;
+  padding: clamp(1.5rem, 3.2vw, 2.3rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact__pickGlow {
+  position: absolute;
+  bottom: -40%;
+  right: -25%;
+  width: 70%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--a1) 28%, transparent), transparent 68%);
+  filter: blur(30px);
+  pointer-events: none;
+  transition: background 0.6s ease;
+}
+
+.contact__pickHead {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+}
+
+.contact__pickHead--two {
+  margin-top: 0.4rem;
+}
+
+.contact__pickHead .mono {
+  color: var(--a1);
+  letter-spacing: 0.18em;
+  transition: color 0.4s ease;
+}
+
+.contact__pickHead h3 {
+  font-size: clamp(1.15rem, 2.3vw, 1.5rem);
+  letter-spacing: -0.03em;
+}
+
+.contact__intents {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.contact__intent {
+  position: relative;
+  isolation: isolate;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--glass);
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: 0.94rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-dim);
+  transition: color 0.3s ease, border-color 0.3s ease, transform 0.35s var(--ease-out);
+}
+
+.contact__intent:hover {
+  color: var(--text);
+  border-color: var(--line-strong);
+  transform: translateY(-2px);
+}
+
+.contact__intent.is-on {
+  color: #08060f;
+  border-color: transparent;
+}
+
+.contact__intentLabel {
+  position: relative;
+  z-index: 1;
+}
+
+.contact__intentBg {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: linear-gradient(120deg, var(--a1), var(--a2));
+  box-shadow: 0 10px 26px -14px var(--a1);
+  z-index: 0;
+}
+
+/* message preview */
+.contact__draft {
+  position: relative;
+  margin-top: 0.5rem;
+  padding: 1.1rem 1.2rem 1.3rem;
+  border-radius: 16px;
+  border: 1px dashed rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.02);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 118px;
+}
+
+.contact__draft .mono {
+  color: var(--text-faint);
+  letter-spacing: 0.18em;
+}
+
+.contact__draft p {
+  position: relative;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--text);
+  display: grid;
+}
+
+.contact__draft p > span {
+  grid-area: 1 / 1;
+}
+
+.contact__sends {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.contact__note {
+  color: var(--text-faint);
+  font-size: 0.72rem;
+}
+
+@media (max-width: 880px) {
+  .contact__grid {
+    grid-template-columns: 1fr;
+  }
+}

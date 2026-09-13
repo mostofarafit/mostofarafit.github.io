@@ -1,0 +1,189 @@
+.skills__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2.2rem;
+}
+
+.skills__tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.05rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--glass);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-dim);
+  transition: color 0.3s ease, border-color 0.3s ease;
+  isolation: isolate;
+}
+
+.skills__tabLabel,
+.skills__tab em {
+  position: relative;
+  z-index: 1;
+}
+
+.skills__tab em {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.skills__tab:hover {
+  color: var(--text);
+  border-color: var(--line-strong);
+}
+
+.skills__tab.is-on {
+  color: #0a0714;
+  border-color: transparent;
+}
+
+.skills__tabBg {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: linear-gradient(120deg, var(--a1), var(--a2));
+  box-shadow: 0 8px 26px -12px var(--a1);
+  z-index: 0;
+}
+
+.skills__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  min-height: 180px;
+  align-content: flex-start;
+}
+
+.skills__chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.62rem 1.05rem;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.008)), var(--card-base);
+  backdrop-filter: blur(10px);
+  font-size: 0.91rem;
+  color: var(--text);
+  cursor: default;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+}
+
+.skills__chip:hover {
+  border-color: color-mix(in srgb, var(--a1) 55%, transparent);
+  box-shadow: 0 14px 32px -18px var(--a1);
+  background: linear-gradient(150deg, color-mix(in srgb, var(--a1) 14%, transparent), rgba(255, 255, 255, 0.015)), var(--card-base);
+}
+
+.skills__chipDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex: none;
+  background: linear-gradient(135deg, var(--a1), var(--a2));
+  transition: transform 0.4s var(--ease-spring), box-shadow 0.4s ease;
+}
+
+.skills__chip:hover .skills__chipDot {
+  transform: scale(1.5);
+  box-shadow: 0 0 14px var(--a1);
+}
+
+.skills__chipTag {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  translate: -50% 6px;
+  padding: 0.25rem 0.6rem;
+  border-radius: 8px;
+  background: #0a0718;
+  border: 1px solid var(--line-strong);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  color: var(--text-dim);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, translate 0.3s var(--ease-out);
+}
+
+.skills__chip:hover .skills__chipTag {
+  opacity: 1;
+  translate: -50% 0;
+}
+
+/* summary cards */
+.skills__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: clamp(2.6rem, 5vw, 4rem);
+}
+
+.skills__sumWrap {
+  display: flex;
+}
+
+.skills__sum {
+  width: 100%;
+  padding: 1.5rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.skills__sum:hover {
+  transform: translateY(-8px);
+}
+
+.skills__sumNum {
+  color: var(--a1);
+  letter-spacing: 0.2em;
+}
+
+.skills__sum h3 {
+  font-size: 1.18rem;
+  letter-spacing: -0.03em;
+}
+
+.skills__sum p {
+  font-size: 0.86rem;
+  color: var(--text-faint);
+  line-height: 1.55;
+}
+
+.skills__sumCount {
+  margin-top: 0.7rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  background: linear-gradient(120deg, var(--a1), var(--a2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.skills__sumCount em {
+  font-style: normal;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  -webkit-text-fill-color: var(--text-faint);
+}

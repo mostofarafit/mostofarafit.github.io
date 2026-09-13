@@ -1,0 +1,230 @@
+.about__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+/* scroll-lit paragraph */
+.about__para {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.5vw, 1.85rem);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.025em;
+  color: var(--text);
+}
+
+.about__word {
+  display: inline-block;
+  will-change: opacity, transform;
+}
+
+.about__langs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.4rem;
+  margin-top: 2.6rem;
+  padding-top: 1.8rem;
+  border-top: 1px solid var(--line);
+}
+
+.lang__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.lang__top b {
+  font-family: var(--font-display);
+  font-size: 1rem;
+}
+
+.lang__bar {
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.lang__bar i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  transform-origin: 0 50%;
+  background: var(--grad-lime);
+  box-shadow: 0 0 16px rgba(200, 255, 94, 0.4);
+}
+
+/* signature card */
+.about__card {
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  position: sticky;
+  top: 6rem;
+}
+
+.about__cardGlow {
+  position: absolute;
+  top: -40%;
+  right: -30%;
+  width: 70%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124, 92, 255, 0.3), transparent 68%);
+  filter: blur(24px);
+  pointer-events: none;
+}
+
+.about__cardHead {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  position: relative;
+}
+
+.about__cardHead img {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 10%;
+  border: 1px solid var(--line-strong);
+  background: #150f28;
+}
+
+.about__cardHead b {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.about__facts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+}
+
+.about__facts li {
+  display: grid;
+  grid-template-columns: 62px 1fr;
+  gap: 0.7rem;
+  align-items: baseline;
+  font-size: 0.92rem;
+  color: var(--text-dim);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+}
+
+.about__facts li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.about__facts .mono {
+  color: var(--violet-soft);
+}
+
+.about__cardLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: flex-start;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--lime);
+  position: relative;
+}
+
+.about__cardLink svg {
+  width: 15px;
+  height: 15px;
+  transition: transform 0.35s var(--ease-out);
+}
+
+.about__cardLink:hover svg {
+  transform: translate(3px, -3px);
+}
+
+/* stats */
+.about__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1rem;
+  margin-top: clamp(3rem, 6vw, 5rem);
+}
+
+.stat {
+  padding: 1.5rem 1.4rem 1.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: transform 0.45s var(--ease-out), border-color 0.4s ease;
+}
+
+.stat:hover {
+  transform: translateY(-7px);
+  border-color: var(--line-strong);
+}
+
+.stat__num {
+  display: flex;
+  align-items: baseline;
+  gap: 0.1rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 5vw, 3.3rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  background: var(--grad-main);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.stat__num em {
+  font-style: normal;
+  font-size: 0.5em;
+}
+
+.stat__label {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.stat__hint {
+  font-size: 0.83rem;
+  color: var(--text-faint);
+}
+
+.stat__bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--grad-main);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.stat:hover .stat__bar {
+  transform: scaleX(1);
+}
+
+@media (max-width: 900px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+  }
+  .about__card {
+    position: static;
+  }
+}
