@@ -1,146 +1,496 @@
-.footer {
-  position: relative;
-  padding-top: 0;
-  border-top: 1px solid var(--line);
-  background: linear-gradient(180deg, transparent, rgba(124, 92, 255, 0.045));
+/* ============================================================
+   Footer — "Horizon": cursor-lit wordmark over a retro grid
+   ============================================================ */
+
+@property --fx {
+  syntax: '<length-percentage>';
+  inherits: true;
+  initial-value: 50%;
+}
+@property --fy {
+  syntax: '<length-percentage>';
+  inherits: true;
+  initial-value: 50%;
 }
 
-.footer__marquee {
-  padding-block: 1.1rem;
-  border-bottom: 1px solid var(--line);
+.footer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  background: radial-gradient(120% 140% at 50% 120%, rgba(124, 92, 255, 0.16), transparent 62%), var(--ink-2);
+}
+
+/* ---------- backdrop layers ---------- */
+.footer__horizon {
+  position: absolute;
+  left: 50%;
+  bottom: -34vw;
+  width: min(150%, 1500px);
+  aspect-ratio: 1;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, rgba(76, 224, 255, 0.28), rgba(124, 92, 255, 0.16) 42%, transparent 66%);
+  filter: blur(28px);
+  opacity: 0.75;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.footer__grid {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 52%;
+  z-index: -2;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(to bottom, rgba(167, 139, 250, 0.22) 0 1px, transparent 1px 46px),
+    repeating-linear-gradient(to right, rgba(167, 139, 250, 0.16) 0 1px, transparent 1px 62px);
+  transform: perspective(340px) rotateX(66deg);
+  transform-origin: bottom center;
+  -webkit-mask-image: linear-gradient(to top, #000 4%, transparent 72%);
+  mask-image: linear-gradient(to top, #000 4%, transparent 72%);
+  animation: footer-grid 7s linear infinite;
+}
+
+@keyframes footer-grid {
+  to {
+    background-position: 0 46px, 0 0;
+  }
+}
+
+/* slow sweep — keeps the panel alive without motion sickness */
+.footer__scan {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.03) 48%, transparent);
+  background-size: 100% 220px;
+  background-repeat: no-repeat;
+  animation: footer-scan 11s var(--ease-out) infinite;
+}
+
+@keyframes footer-scan {
+  0% {
+    background-position: 0 -240px;
+  }
+  60%,
+  100% {
+    background-position: 0 110%;
+  }
 }
 
 .footer__inner {
-  padding-block: clamp(2.5rem, 6vw, 4.5rem);
+  position: relative;
+  padding-block: clamp(2.4rem, 6vw, 4rem) clamp(1.6rem, 3vw, 2.4rem);
   display: flex;
   flex-direction: column;
-  gap: clamp(2rem, 5vw, 3.5rem);
+  gap: clamp(1.8rem, 4vw, 2.8rem);
 }
 
-.footer__big {
+/* ---------- status strip ---------- */
+.footer__status {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.footer__beacon {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  align-self: flex-start;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.5rem, 5.6vw, 3.4rem);
-  letter-spacing: -0.045em;
-  line-height: 1.05;
-  word-break: break-word;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
 }
 
-.footer__big span {
-  background: linear-gradient(90deg, var(--text) 50%, var(--violet-soft) 50%);
-  background-size: 220% 100%;
-  background-position: 0% 0;
+.footer__beacon i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 0 0 rgba(200, 255, 94, 0.55);
+  animation: footer-pulse 2.2s ease-out infinite;
+}
+
+@keyframes footer-pulse {
+  70% {
+    box-shadow: 0 0 0 10px rgba(200, 255, 94, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(200, 255, 94, 0);
+  }
+}
+
+.footer__statusMid {
+  margin-inline-start: auto;
+}
+
+.footer__clock {
+  display: inline-flex;
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.footer__clock b {
+  font-weight: 500;
+  min-width: 0.62ch;
+  text-align: center;
+}
+
+.footer__tick {
+  color: var(--violet-soft);
+  animation: footer-blink 1s steps(1, end) infinite;
+}
+
+@keyframes footer-blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* ---------- cursor-lit wordmark ---------- */
+.footer__mark {
+  --fx: 50%;
+  --fy: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.02em;
+  line-height: 0.86;
+  user-select: none;
+  cursor: default;
+}
+
+.footer__markRow {
+  position: relative;
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(3.1rem, 15.1vw, 12.5rem);
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+/* second line tracked out so both rows read as one solid block */
+.footer__markRow--wide {
+  letter-spacing: 0.245em;
+  margin-inline-end: -0.245em;
+}
+
+.footer__markOut {
+  display: block;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(231, 227, 244, 0.26);
+  transition: -webkit-text-stroke-color 0.5s ease;
+}
+
+.footer__mark.is-lit .footer__markOut {
+  -webkit-text-stroke-color: rgba(231, 227, 244, 0.4);
+}
+
+/* the filled copy, revealed only under the pointer */
+.footer__markLit {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: var(--grad-main);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  transition: background-position 0.7s var(--ease-out);
+  -webkit-mask-image: radial-gradient(circle at var(--fx) var(--fy), #000 0%, rgba(0, 0, 0, 0.55) 26%, transparent 58%);
+  mask-image: radial-gradient(circle at var(--fx) var(--fy), #000 0%, rgba(0, 0, 0, 0.55) 26%, transparent 58%);
+  transition: --fx 0.45s var(--ease-out), --fy 0.45s var(--ease-out);
+  pointer-events: none;
 }
 
-.footer__big:hover span {
-  background-position: -100% 0;
+/* idle — the light drifts on its own (also the touch-device behaviour) */
+.footer__mark:not(.is-lit) .footer__markLit {
+  animation: footer-drift 13s ease-in-out infinite;
 }
 
-.footer__big svg {
-  width: clamp(20px, 3vw, 34px);
-  height: clamp(20px, 3vw, 34px);
+@keyframes footer-drift {
+  0%,
+  100% {
+    --fx: 12%;
+    --fy: 26%;
+  }
+  50% {
+    --fx: 88%;
+    --fy: 76%;
+  }
+}
+
+/* ---------- call to action ---------- */
+.footer__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.footer__pitch {
+  max-width: 36ch;
+  font-size: clamp(0.95rem, 1.5vw, 1.08rem);
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.footer__mail {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1.5rem 0.85rem 1.35rem;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  overflow: hidden;
+  transition: border-color 0.35s ease;
+}
+
+.footer__mailRing {
+  position: absolute;
+  inset: -60%;
+  background: conic-gradient(from 0deg, transparent 0 60%, rgba(124, 92, 255, 0.85) 80%, rgba(255, 92, 122, 0.75) 92%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  animation: footer-spin 4.5s linear infinite;
+  z-index: -2;
+}
+
+@keyframes footer-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+.footer__mail::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: var(--ink-2);
+  z-index: -1;
+}
+
+.footer__mail:hover {
+  border-color: transparent;
+}
+
+.footer__mail:hover .footer__mailRing {
+  opacity: 1;
+}
+
+.footer__mailText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  text-align: left;
+}
+
+.footer__mailText em {
+  font-style: normal;
+  letter-spacing: 0.18em;
+  color: var(--text-faint);
+}
+
+.footer__mailText b {
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 2.2vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  word-break: break-word;
+}
+
+.footer__mail svg {
+  width: 20px;
+  height: 20px;
   flex: none;
   color: var(--coral);
   transition: transform 0.45s var(--ease-out);
 }
 
-.footer__big:hover svg {
-  transform: translate(5px, -5px);
+.footer__mail:hover svg {
+  transform: translate(4px, -4px);
 }
 
-.footer__cols {
+/* ---------- transmission row ---------- */
+.footer__chan {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 2rem;
-  padding-top: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   border-top: 1px solid var(--line);
 }
 
-.footer__col {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
+.footer__chan li {
+  border-bottom: 1px solid var(--line);
 }
 
-.footer__col .mono {
-  letter-spacing: 0.2em;
+.footer__chan a {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    'idx label'
+    'idx hint';
+  align-items: center;
+  column-gap: 0.75rem;
+  row-gap: 0.1rem;
+  padding: 1.05rem 1rem 1.05rem 0.2rem;
+  overflow: hidden;
+}
+
+.footer__chanIdx {
+  grid-area: idx;
   color: var(--text-faint);
+  transition: color 0.3s ease;
 }
 
-.footer__col ul {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.footer__col a {
-  font-size: 0.94rem;
-  color: var(--text-dim);
-  transition: color 0.28s ease, transform 0.35s var(--ease-out);
-  display: inline-block;
-}
-
-.footer__col a:hover {
-  color: var(--lime);
-  transform: translateX(4px);
-}
-
-.footer__clock {
+.footer__chanLabel {
+  grid-area: label;
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  font-variant-numeric: tabular-nums;
-  background: var(--grad-cool);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  font-weight: 700;
+  font-size: 1.02rem;
+  letter-spacing: -0.015em;
+  color: var(--text);
+  transition: transform 0.4s var(--ease-out);
 }
 
-.footer__loc {
-  font-size: 0.85rem;
+.footer__chanHint {
+  grid-area: hint;
+  font-size: 0.72rem;
   color: var(--text-faint);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: transform 0.4s var(--ease-out) 0.03s, color 0.3s ease;
 }
 
+/* sweeping underline in each link's own accent */
+.footer__chanLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--a1, var(--violet)), var(--a2, var(--coral)));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.footer__chan a:hover .footer__chanLine,
+.footer__chan a:focus-visible .footer__chanLine {
+  transform: scaleX(1);
+}
+
+.footer__chan a:hover .footer__chanLabel,
+.footer__chan a:hover .footer__chanHint,
+.footer__chan a:focus-visible .footer__chanLabel,
+.footer__chan a:focus-visible .footer__chanHint {
+  transform: translateX(6px);
+}
+
+.footer__chan a:hover .footer__chanIdx,
+.footer__chan a:focus-visible .footer__chanIdx {
+  color: var(--a1, var(--violet));
+}
+
+.footer__chan a:hover .footer__chanHint,
+.footer__chan a:focus-visible .footer__chanHint {
+  color: var(--text-dim);
+}
+
+/* ---------- base bar ---------- */
 .footer__base {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding-top: 1.6rem;
-  border-top: 1px solid var(--line);
-  font-size: 0.82rem;
-  color: var(--text-faint);
-  font-family: var(--font-mono);
+  font-size: 0.76rem;
+}
+
+.footer__colophon {
+  flex: 1 1 auto;
+  text-align: center;
 }
 
 .footer__top {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  flex: none;
   color: var(--text-dim);
   transition: color 0.3s ease;
 }
 
-.footer__top svg {
-  width: 15px;
-  height: 15px;
-  transition: transform 0.4s var(--ease-out);
+.footer__topRing {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.55;
+  animation: footer-spin 18s linear infinite;
+}
+
+.footer__topArrow {
+  width: 17px;
+  height: 17px;
+  transition: transform 0.45s var(--ease-out);
 }
 
 .footer__top:hover {
   color: var(--lime);
 }
 
-.footer__top:hover svg {
+.footer__top:hover .footer__topArrow {
   transform: translateY(-4px);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 720px) {
+  .footer__statusMid {
+    margin-inline-start: 0;
+  }
+
+  .footer__colophon {
+    order: 3;
+    flex-basis: 100%;
+    text-align: left;
+  }
+
+  .footer__grid {
+    height: 40%;
+  }
+
+  .footer__mail {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer__grid,
+  .footer__scan,
+  .footer__mailRing,
+  .footer__topRing,
+  .footer__mark:not(.is-lit) .footer__markLit {
+    animation: none;
+  }
+
+  .footer__mark:not(.is-lit) .footer__markLit {
+    -webkit-mask-image: none;
+    mask-image: none;
+    opacity: 0.92;
+  }
 }
